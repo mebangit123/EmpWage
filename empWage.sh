@@ -1,21 +1,26 @@
 #!/bin/bash -x
 echo "Welcome to Employee Wage Computation program on Master Branch"
 
-isFullTime=1
-isPartTime=2
-totalSalary=0
-empRatePerHr=20
-numWorkingDays=4
+IS_FULL_TIME=1
+IS_PART_TIME=2
+MAX_HRS_IN_MONTH=10
+EMP_RATE_PER_HR=20
+NUM_WORKING_DAYS=20
 
-for (( day=1; day<=$numWorkingDays; day++ ))
+totalEmpHr=0
+totalWorkingDays=0
+
+while [[ $totalEmpHr -lt $EMP_RATE_PER_HR && $totalWorkingDays -lt $NUM_WORKING_DAYS ]]
+
 do
+	((totalWorkingDays++))
 	empCheck=$((RANDOM%3))
 	case $empCheck in
 
-		$isFullTime)
+		$IS_FULL_TIME)
 			empHrs=8
 				;;
-		$isPartTime)
+		$IS_PART_TIME)
 			empHrs=4
 				;;
 		*)
@@ -23,6 +28,6 @@ do
 				;;
 	esac
 
-		salary=$(($empHrs*$empRatePerHr))
-		totalSalary=$(($totalSalary+$salary))
+		totalEmpHr=$(($totalEmpHr+$empHrs))
 done
+		totalSalary=$(($totalEmpHr*$EMP_RATE_PER_HR))
