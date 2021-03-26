@@ -1,19 +1,21 @@
 #!/bin/bash -x
 echo "Welcome to Employee Wage Computation program on Master Branch"
 
-isPresent=1
+isFullTime=1
 isPartTime=2
 empRatePerHr=20
 empCheck=$((RANDOM%3))
 
-if [ $isPresent -eq $empCheck ]
-	then
-		empHrs=8;
-elif [ $isPartTime -eq $empCheck ]
-	then
-		empHrs=4;
-else
-		empHrs=0;
-fi
+case $empCheck in
+		$isFullTime)
+			empHrs=8
+				;;
+		$isPartTime)
+			empHrs=4
+				;;
+		*)
+			empHrs=0
+				;;
+esac
 
 salary=$(($empHrs*$empRatePerHr))
