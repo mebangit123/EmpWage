@@ -26,10 +26,20 @@ case $1 in
 	echo $empHrs
 }
 
+function calcDailyWage() {
+	local workHrs=$1
+	wage=$(($workHrs*$EMP_RATE_PER_HR))
+	echo $wage
+}
+
 while [[ $totalEmpHr -lt $EMP_RATE_PER_HR && $totalWorkingDays -lt $NUM_WORKING_DAYS ]]
 do
 	((totalWorkingDays++))
 	workHours="$( getWorkingHours $((RANDOM%3)) )"
 	totalEmpHr=$(($totalEmpHr+$workHours))
+	empDailyWage[$totalWorkingDays]="$( calcDailyWage $workHours)"
 done
+
 	totalSalary=$(($totalEmpHr*$EMP_RATE_PER_HR))
+	echo "Daily wage " ${empDailyWage[@]}
+
